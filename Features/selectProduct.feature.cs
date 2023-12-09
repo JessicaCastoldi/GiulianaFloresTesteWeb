@@ -100,13 +100,10 @@ namespace GiulianaFloresTesteWeb.Features
         testRunner.And("clico no produto escolhido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 6
-        testRunner.Then("exibe a pagina \"AZALÉIA ROSA PARA DECORAR\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 7
         testRunner.And("valido o nome do produto \"Azaléia Rosa para Decorar\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 8
-        testRunner.And("valido o preço do produto \"R$179,00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 7
+        testRunner.And("valido o preco do produto \"R$179,00\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

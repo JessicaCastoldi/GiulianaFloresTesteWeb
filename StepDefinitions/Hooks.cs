@@ -20,11 +20,13 @@ namespace StepDefinitions
 
 
         //Métodos/ Funções
-        public Hooks(ScenarioContext scenarioContext) // externa a classe // Construtor public sem a palavra classe
+
+        public Hooks(ScenarioContext scenarioContext) 
         {
             _scenarioContext = scenarioContext;
         }
 
+        
         [BeforeScenario]
         public void ScenarioSetup()
         {

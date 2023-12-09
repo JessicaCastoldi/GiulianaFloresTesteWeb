@@ -3,7 +3,7 @@ Feature: Selecionar Produto na Loja
         Given que acesso a pagina inicial do site
         When pesquiso o produto "Azaleia"
         And clico no produto escolhido
-        Then exibe a pagina "AZALÉIA ROSA PARA DECORAR"
+         Then exibe a pagina "Azaléia Rosa para Decorar"
         And valido o nome do produto "Azaléia Rosa para Decorar"
         And valido o preço do produto "R$179,00"
         

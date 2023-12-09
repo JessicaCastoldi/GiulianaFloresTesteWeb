@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -12,15 +13,19 @@ namespace GiulianaFloresTesteWeb
     public class StepDefinitions{
 
         private readonly ScenarioContext _scenarioContext;
-        private IWebDriver driver; 
+        private IWebDriver driver;
+
+        public object ExpectedConditions { get; private set; }
+
         public StepDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            driver = (IWebDriver) _scenarioContext["driver"];
+             driver = (IWebDriver) _scenarioContext["driver"];
+                    
         }
 
         [Given(@"que acesso a pagina inicial do site")]
-     public void GivenQueAcessoAPaginaInicialDoSite()
+           public void GivenQueAcessoAPaginaInicialDoSite()
         {
             driver.Navigate().GoToUrl("https://www.giulianaflores.com.br");
         }
@@ -37,22 +42,26 @@ namespace GiulianaFloresTesteWeb
      [When(@"clico no produto escolhido")]
       public void WhenClicoNoProdutoEscolhido()
         {
+            driver.FindElement(By.ClassName("close-button")).Click();
             driver.FindElement(By.CssSelector("h2.title-item")).Click();
         }
-
-     [Then(@"exibe a pagina ""(.*)""")]
+[Then(@"exibe a pagina ""(.*)""")]
         public void ThenExibeAPagina(string titleAzaleiaRosa )
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
-            wait.Until(d => driver.FindElement(By.Id("ContentSite_lblProductDsName")).Displayed);
-            Assert.That(driver.FindElement(By.Id("ContentSite_lblProductDsName")).Text,
-                                           Is.EqualTo(titleAzaleiaRosa));
-        }
+            wait.Until(d => driver.FindElement(By.CssSelector
+            ("a[href=https://www.giulianaflores.com.br/azaleia-rosa-para-decorar/prs-3106-27055/]")).Text);
+           Assert.That(driver.FindElement(By.CssSelector("a[href=\"https://www.giulianaflores.com.br/azaleia-rosa-para-decorar/prs-3106-27055/\"] h2")).Text,
+                                          Is.EqualTo(titleAzaleiaRosa));
 
+        }
+     
      [Then(@"valido o nome do produto ""(.*)""")]
         public void ThenValidoONomeDoProduto(string nomeProduto)
         {
-            Assert.That(driver.FindElement(By.Id("#ContentSite_lblProductDsName.jq-product-name")).Text,Is.EqualTo(nomeProduto));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
+            wait.Until(d => driver.FindElement(By.Id("span#ContentSite_lblProductDsName")).Displayed);
+            Assert.That(driver.FindElement(By.CssSelector("span#ContentSite_lblProductDsName")).Text,Is.EqualTo(nomeProduto));
         }
 
 
