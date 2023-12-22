@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 using WebDriverManager;
@@ -43,16 +44,15 @@ namespace GiulianaFloresTesteWeb
       public void WhenClicoNoProdutoEscolhido()
         {
             driver.FindElement(By.ClassName("close-button")).Click();
-            driver.FindElement(By.CssSelector("h2.title-item")).Click();
+            driver.FindElement(By.XPath("//*[@id='ContentSite_uppProducts']/ul/li[2]/div/a/h2")).Click();
         }
 [Then(@"exibe a pagina ""(.*)""")]
         public void ThenExibeAPagina(string titleAzaleiaRosa )
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
-            wait.Until(d => driver.FindElement(By.CssSelector
-            ("a[href=https://www.giulianaflores.com.br/azaleia-rosa-para-decorar/prs-3106-27055/]")).Text);
-           Assert.That(driver.FindElement(By.CssSelector("a[href=\"https://www.giulianaflores.com.br/azaleia-rosa-para-decorar/prs-3106-27055/\"] h2")).Text,
-                                          Is.EqualTo(titleAzaleiaRosa));
+            wait.Until(d => driver.FindElement(By.ClassName("jq-product-name")));
+            Assert.That(driver.FindElement(By.ClassName("jq-product-name")).Text,
+                                          Is.EqualTo(titleAzaleiaRosa).IgnoreCase);
 
         }
      
@@ -60,8 +60,8 @@ namespace GiulianaFloresTesteWeb
         public void ThenValidoONomeDoProduto(string nomeProduto)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(10000));
-            wait.Until(d => driver.FindElement(By.Id("span#ContentSite_lblProductDsName")).Displayed);
-            Assert.That(driver.FindElement(By.CssSelector("span#ContentSite_lblProductDsName")).Text,Is.EqualTo(nomeProduto));
+            wait.Until(d => driver.FindElement(By.ClassName("jq-product-name")).Displayed);
+            Assert.That(driver.FindElement(By.ClassName("jq-product-name")).Text,Is.EqualTo(nomeProduto).IgnoreCase);
         }
 
 

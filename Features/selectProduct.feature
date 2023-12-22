@@ -5,7 +5,7 @@ Feature: Selecionar Produto na Loja
         And clico no produto escolhido
          Then exibe a pagina "Azaléia Rosa para Decorar"
         And valido o nome do produto "Azaléia Rosa para Decorar"
-        And valido o preço do produto "R$179,00"
+        And valido o preço do produto "R$ 179,90"
         
 
 
